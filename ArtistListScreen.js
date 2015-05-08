@@ -1,16 +1,18 @@
 'use strict';
 
 var React = require('react-native');
+var fetch = require('fetch');
+var WebView = require('WebView');
+
 var {
   AppRegistry,
   Image,
   ListView,
   StyleSheet,
   Text,
+  TouchableHighlight,
   View,
 } = React;
-
-var fetch = require('fetch');
 
 var API_KEY='81bbfd4ecee91148e9f6df34090f5d7e';
 var API_URL = 'http://ws.audioscrobbler.com/2.0/?method=geo.gettopartists&country=ukraine&format=json';
@@ -55,12 +57,22 @@ class ArtistListScreen extends React.Component {
     return this.state.dataSource.cloneWithRows(artists);
   }
 
+  openPage(url) {
+    this.props.navigator.push({
+      title: 'Web View',
+      component: WebView,
+      passProps: {url}
+    });
+  }
+
   renderRow(artist: Object) {
     return (
         <View>
-          <Text>
-            {artist.name}
-          </Text>
+          <TouchableHighlight
+            onPress={this.openPage.bind(this, artist.url)}
+            underlayColor='transparent'>
+            <Text>{artist.name}</Text>
+          </TouchableHighlight>
         </View>
       );
   }
@@ -69,7 +81,7 @@ class ArtistListScreen extends React.Component {
     return (
       <ListView
         dataSource={this.state.dataSource}
-        renderRow={this.renderRow}
+        renderRow={this.renderRow.bind(this)}
         automaticallyAdjustContentInsets={false}
         keyboardDismissMode="onDrag"
         keyboardShouldPersistTaps={true}
