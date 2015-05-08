@@ -16,21 +16,22 @@ var API_KEY='81bbfd4ecee91148e9f6df34090f5d7e';
 var API_URL = 'http://ws.audioscrobbler.com/2.0/?method=geo.gettopartists&country=ukraine&format=json';
 var REQUEST_URL = API_URL + '&api_key=' + API_KEY;
 
-var ArtistListScreen = React.createClass({
-  getInitialState: function() {
-      return {
+class ArtistListScreen extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
       isLoading: false,
       dataSource: new ListView.DataSource({
         rowHasChanged: (row1, row2) => row1 !== row2
       })
     }
-  },
+  }
   
-  componentDidMount: function() {
+  componentDidMount() {
     this.loadArtists();
-  },
+  }
   
-  loadArtists: function() {
+  loadArtists() {
     this.setState({
       isLoading: true
     });
@@ -48,13 +49,13 @@ var ArtistListScreen = React.createClass({
         })
       })
       .done();
-  },
+  }
 
-  getDataSource: function(artists: Array<any>): ListView.DataSource {
+  getDataSource(artists: Array<any>): ListView.DataSource {
     return this.state.dataSource.cloneWithRows(artists);
-  },
+  }
 
-  renderRow: function(artist: Object) {
+  renderRow(artist: Object) {
     return (
         <View>
           <Text>
@@ -62,9 +63,9 @@ var ArtistListScreen = React.createClass({
           </Text>
         </View>
       );
-  },
+  }
 
-  render: function() {
+  render() {
     return (
       <ListView
         dataSource={this.state.dataSource}
@@ -76,6 +77,6 @@ var ArtistListScreen = React.createClass({
       />
     );
   }
-});
+};
 
 module.exports = ArtistListScreen;
