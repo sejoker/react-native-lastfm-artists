@@ -2,6 +2,7 @@
 
 var React = require('react-native');
 var fetch = require('fetch');
+var ArtistCell = require('./ArtistCell');
 var WebView = require('WebView');
 
 var {
@@ -44,7 +45,6 @@ class ArtistListScreen extends React.Component {
         console.error(error);
       })
       .then((responseData) => {
-        console.log(responseData)
         this.setState({
           isLoading: false,
           dataSource: this.getDataSource(responseData.topartists.artist)
@@ -67,28 +67,34 @@ class ArtistListScreen extends React.Component {
 
   renderRow(artist: Object) {
     return (
-        <View>
-          <TouchableHighlight
-            onPress={this.openPage.bind(this, artist.url)}
-            underlayColor='transparent'>
-            <Text>{artist.name}</Text>
-          </TouchableHighlight>
-        </View>
+        <ArtistCell 
+          artist={artist} 
+          onOpenPage={this.openPage.bind(this, artist.url)}/>
       );
   }
 
   render() {
     return (
-      <ListView
-        dataSource={this.state.dataSource}
-        renderRow={this.renderRow.bind(this)}
-        automaticallyAdjustContentInsets={false}
-        keyboardDismissMode="onDrag"
-        keyboardShouldPersistTaps={true}
-        showsVerticalScrollIndicator={false}
-      />
+      <View style={styles.container}>
+        <ListView
+          dataSource={this.state.dataSource}
+          renderRow={this.renderRow.bind(this)}
+          automaticallyAdjustContentInsets={false}
+          keyboardDismissMode="onDrag"
+          keyboardShouldPersistTaps={true}
+          showsVerticalScrollIndicator={false}
+        />
+      </View>
     );
   }
 };
+
+var styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: 'white',
+    marginTop: 64
+  }
+})
 
 module.exports = ArtistListScreen;
