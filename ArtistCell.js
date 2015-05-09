@@ -1,6 +1,7 @@
 'use strict';
 
 var React = require('react-native');
+var Separator = require('./Separator');
 
 var {
   Image,
@@ -30,6 +31,7 @@ class ArtistCell extends React.Component {
               </View>
             </View>
         </TouchableHighlight>
+        <Separator/>
       </View>
     );
   }
@@ -44,7 +46,6 @@ var styles = StyleSheet.create({
     padding: 5
   },
   artistImage: {
-    backgroundColor: '#dddddd',
     height: 84,
     width: 126,
     marginRight: 10
@@ -54,7 +55,7 @@ var styles = StyleSheet.create({
   },
   name: {
     textAlign: 'center',
-    fontSize: 12,
+    fontSize: 14,
     color: '#999999'
   },
   rank: {
