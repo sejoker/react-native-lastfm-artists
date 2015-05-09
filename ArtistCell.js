@@ -12,8 +12,6 @@ var {
 } = React;
 
 class ArtistCell extends React.Component {
-
-
   render() {
     return (
       <View>

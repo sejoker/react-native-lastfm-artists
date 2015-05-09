@@ -3,7 +3,7 @@
 var React = require('react-native');
 var fetch = require('fetch');
 var ArtistCell = require('./ArtistCell');
-var WebView = require('WebView');
+var WebView = require('./WebView');
 
 var {
   AppRegistry,
@@ -16,7 +16,7 @@ var {
 } = React;
 
 var API_KEY='81bbfd4ecee91148e9f6df34090f5d7e';
-var API_URL = 'http://ws.audioscrobbler.com/2.0/?method=geo.gettopartists&country=ukraine&format=json';
+var API_URL = 'http://ws.audioscrobbler.com/2.0/?method=geo.gettopartists&country=ukraine&format=json&limit=40';
 var REQUEST_URL = API_URL + '&api_key=' + API_KEY;
 
 class ArtistListScreen extends React.Component {
@@ -45,7 +45,6 @@ class ArtistListScreen extends React.Component {
         console.error(error);
       })
       .then((responseData) => {
-        console.log(responseData.topartists.artist);
         this.setState({
           isLoading: false,
           dataSource: this.getDataSource(responseData.topartists.artist)
@@ -64,6 +63,7 @@ class ArtistListScreen extends React.Component {
       component: WebView,
       passProps: {url}
     });
+    console.log(url);
   }
 
   renderRow(artist: Object) {
@@ -81,9 +81,6 @@ class ArtistListScreen extends React.Component {
           dataSource={this.state.dataSource}
           renderRow={this.renderRow.bind(this)}
           automaticallyAdjustContentInsets={false}
-          keyboardDismissMode="onDrag"
-          keyboardShouldPersistTaps={true}
-          showsVerticalScrollIndicator={false}
         />
       </View>
     );

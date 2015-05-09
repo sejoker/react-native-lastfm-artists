@@ -19,7 +19,7 @@ var LastFmArtists = React.createClass({
      <NavigatorIOS
       style={styles.container}
       initialRoute={{
-        title: "LastFM Top Artists",
+        title: "last.fm Top Artists",
         component: ArtistListScreen
       }}
       />
