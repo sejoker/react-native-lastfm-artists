@@ -45,6 +45,7 @@ class ArtistListScreen extends React.Component {
         console.error(error);
       })
       .then((responseData) => {
+        console.log(responseData.topartists.artist);
         this.setState({
           isLoading: false,
           dataSource: this.getDataSource(responseData.topartists.artist)
