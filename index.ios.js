@@ -1,17 +1,13 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- */
 'use strict';
 
 var React = require('react-native');
+var ArtistListScreen = require('./ArtistListScreen');
+
 var {
   AppRegistry,
   NavigatorIOS,
   StyleSheet
 } = React;
-
-var ArtistListScreen = require('./ArtistListScreen');
 
 var LastFmArtists = React.createClass({
   render: function() {
@@ -19,7 +15,7 @@ var LastFmArtists = React.createClass({
      <NavigatorIOS
       style={styles.container}
       initialRoute={{
-        title: "last.fm Top Artists",
+        title: "Last.fm Top Artists",
         component: ArtistListScreen
       }}
       />

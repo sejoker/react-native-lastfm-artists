@@ -6,7 +6,6 @@ var ArtistCell = require('./ArtistCell');
 var WebView = require('./WebView');
 
 var {
-  AppRegistry,
   Image,
   ListView,
   StyleSheet,
@@ -15,9 +14,10 @@ var {
   View,
 } = React;
 
-var API_KEY='81bbfd4ecee91148e9f6df34090f5d7e';
-var API_URL = 'http://ws.audioscrobbler.com/2.0/?method=geo.gettopartists&country=ukraine&format=json&limit=40';
-var REQUEST_URL = API_URL + '&api_key=' + API_KEY;
+// please get api token here http://www.last.fm/api/account/create
+const API_KEY='81bbfd4ecee91148e9f6df34090f5d7e';
+const API_URL = 'http://ws.audioscrobbler.com/2.0/?method=geo.gettopartists&country=ukraine&format=json&limit=40';
+const REQUEST_URL = API_URL + '&api_key=' + API_KEY;
 
 class ArtistListScreen extends React.Component {
   constructor(props) {
@@ -63,7 +63,6 @@ class ArtistListScreen extends React.Component {
       component: WebView,
       passProps: {url}
     });
-    console.log(url);
   }
 
   renderRow(artist: Object) {
